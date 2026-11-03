@@ -84,4 +84,153 @@
   <div class="login-box">
     <h2 style="color: var(--gold);">ARENA <span style="color: var(--text)">ADMIN</span></h2>
     <input type="password" id="adminPass" placeholder="Digite a senha de acesso" onkeypress="if(event.key==='Enter') fazerLogin()">
-    <button class
+    <button class="btn primary" style="width: 100%; padding: 14px; font-size: 1rem; justify-content: center;" onclick="fazerLogin()" id="btnLogin">Acessar Painel</button>
+    <p id="loginError" style="color: var(--red); font-size: 0.85rem; margin-top: 12px; display: none;">Senha incorreta!</p>
+  </div>
+</div>
+
+<div id="dashboard" style="display: none; width: 100%;">
+  <aside class="sidebar">
+    <div class="brand">ARENA <span>ADMIN</span></div>
+    <div class="nav">
+      <div class="nav-item active">📦 Todas as Vendas</div>
+    </div>
+    <div class="sidebar-bottom">
+      <div class="btn-side" onclick="carregarDados()">🔄 Atualizar Lista</div>
+      <div class="btn-side" onclick="toggleTheme()" id="themeBtn">🌙 Modo Escuro</div>
+      <div class="btn-side danger" onclick="sair()" style="color: var(--red);">🚪 Sair</div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="header"><h1>Painel de Vendas (ZPay)</h1></div>
+    
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">Total Recebido</div>
+        <div class="stat-value green" id="statFaturamento">R$ 0,00</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Vendas Aprovadas</div>
+        <div class="stat-value" id="statPagos">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Pendentes</div>
+        <div class="stat-value gold" id="statPendentes">0</div>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>ID / Data</th>
+            <th>Valor</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="tabelaCorpo">
+          <tr><td colspan="3" style="text-align:center; padding: 30px;">Carregando dados...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+
+<script>
+  async function fazerLogin() {
+    const pass = document.getElementById('adminPass').value;
+    const btn = document.getElementById('btnLogin');
+    const error = document.getElementById('loginError');
+
+    if(!pass) return;
+    btn.disabled = true; btn.textContent = 'Verificando...';
+    error.style.display = 'none';
+
+    try {
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: pass })
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        sessionStorage.setItem('arena_admin_logado', '1');
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'flex';
+        carregarDados();
+      } else {
+        error.style.display = 'block';
+        btn.disabled = false; btn.textContent = 'Acessar Painel';
+      }
+    } catch (e) {
+      alert('Erro de conexão com o servidor.');
+      btn.disabled = false; btn.textContent = 'Acessar Painel';
+    }
+  }
+
+  function sair() {
+    sessionStorage.removeItem('arena_admin_logado');
+    location.reload();
+  }
+
+  function toggleTheme() {
+    const html = document.documentElement;
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    document.getElementById('themeBtn').textContent = isDark ? '☀️ Modo Claro' : '🌙 Modo Escuro';
+  }
+
+  async function carregarDados() {
+    document.getElementById('tabelaCorpo').innerHTML = '<tr><td colspan="3" style="text-align: center; padding: 30px;">Buscando pagamentos...</td></tr>';
+    
+    try {
+      const res = await fetch('/api/list-payments');
+      const json = await res.json();
+      
+      if (!json.success) throw new Error('Falha ao carregar');
+
+      const pagamentos = json.data;
+      let faturamento = 0, pagos = 0, pendentes = 0;
+
+      const tbody = document.getElementById('tabelaCorpo');
+      if (pagamentos.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="3" style="text-align: center; padding: 30px;">Nenhum pagamento encontrado.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = pagamentos.map(p => {
+        const isPaid = ['paid', 'approved', 'completed'].includes(p.status.toLowerCase());
+        if (isPaid) { faturamento += (p.amount || 0); pagos++; }
+        else if (p.status === 'pending') { pendentes++; }
+        
+        return `
+          <tr>
+            <td style="font-family: monospace; font-size: 0.8rem;">
+              ${p.id || p.paymentId}<br>
+              <span style="color: var(--muted); font-size: 0.7rem;">${p.createdAt ? new Date(p.createdAt).toLocaleString('pt-BR') : '-'}</span>
+            </td>
+            <td style="font-weight: bold; color: var(--green);">R$ ${(p.amount || 0).toFixed(2).replace('.', ',')}</td>
+            <td><span class="badge ${isPaid ? 'pago' : 'pendente'}">${p.status}</span></td>
+          </tr>
+        `;
+      }).join('');
+
+      document.getElementById('statFaturamento').textContent = 'R$ ' + faturamento.toFixed(2).replace('.', ',');
+      document.getElementById('statPagos').textContent = pagos;
+      document.getElementById('statPendentes').textContent = pendentes;
+
+    } catch (e) {
+      document.getElementById('tabelaCorpo').innerHTML = '<tr><td colspan="3" style="text-align: center; color: var(--red); padding: 30px;">Erro ao carregar dados da ZPay.</td></tr>';
+    }
+  }
+
+  if (sessionStorage.getItem('arena_admin_logado') === '1') {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'flex';
+    carregarDados();
+  }
+</script>
+</body>
+</html>
