@@ -9,17 +9,39 @@ export default async function handler(req, res) {
         const CLIENT_SECRET = 'zsk_87b13fb23ba5eed5d6d9f0f9e6153d20dfeac10e24a66dd6';
         const BASE_URL = 'https://zpayapi.app/api/v2';
 
-        // Puxa os últimos 50 pagamentos da ZPay
-        const response = await axios.get(`${BASE_URL}/payments?limit=50`, {
-            headers: { 'client-id': CLIENT_ID, 'client-secret': CLIENT_SECRET }
+        // Requisição para listar os pagamentos
+        const response = await axios.get(`${BASE_URL}/payments`, {
+            headers: {
+                'client-id': CLIENT_ID,
+                'client-secret': CLIENT_SECRET
+            }
         });
 
-        const pagamentos = Array.isArray(response.data) ? response.data : (response.data.data || []);
+        // A ZPay pode retornar os dados de formas diferentes, vamos garantir que pegamos a lista
+        let pagamentos = [];
+        if (Array.isArray(response.data)) {
+            pagamentos = response.data;
+        } else if (response.data && response.data.data) {
+            pagamentos = response.data.data;
+        } else if (response.data && response.data.payments) {
+            pagamentos = response.data.payments;
+        }
+
+        // Se ainda estiver vazio, manda o objeto cru pra gente debugar
+        if (pagamentos.length === 0 && Object.keys(response.data).length > 0 && !response.data.data) {
+            console.log("Formato da ZPay desconhecido:", response.data);
+        }
 
         return res.status(200).json({ success: true, data: pagamentos });
 
     } catch (error) {
-      console.error('Erro ZPay:', error.message);
-        return res.status(500).json({ success: false, error: 'Erro ao buscar pagamentos' });
+        // Mostra o erro real no log da Vercel
+        console.error('ERRO ZPAY DETALHADO:', error.response?.data || error.message);
+        
+        return res.status(500).json({ 
+            success: false, 
+            error: 'Falha ao buscar ZPay',
+            detalhes: error.response?.data || error.message 
+        });
     }
 }
