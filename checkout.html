@@ -179,9 +179,11 @@
     else e.target.value = v;
   });
 
+  // ADICIONADO O PRODUTO "ESPECIAL" AQUI
   const produtos = {
     completo: { id: 'completo', nome: 'ArenaLives Completo', desc: '11 jogos para PC + APK Android.', preco: 29.90, img: './images/3_3a9c87344d9f364.webp' },
-    individual: { id: 'individual', nome: 'Roblox Avatar', desc: 'Somente o jogo Roblox Avatar para PC.', preco: 9.90, img: './images/5_6c11bc7c9b6f8fa.webp' }
+    individual: { id: 'individual', nome: 'Roblox Avatar', desc: 'Somente o jogo Roblox Avatar para PC.', preco: 9.90, img: './images/5_6c11bc7c9b6f8fa.webp' },
+    especial: { id: 'especial', nome: 'ArenaLives Completo (Oferta)', desc: '11 jogos para PC + APK Android. Desconto exclusivo.', preco: 19.90, img: './images/3_3a9c87344d9f364.webp' }
   };
 
   let produtoPrincipalId = 'completo';
@@ -223,6 +225,7 @@
 
     Object.values(produtos).forEach(p => {
       if (p.id === produtoPrincipalId) return;
+      if (produtoPrincipalId === 'especial' && p.id === 'completo') return; // Evita mostrar o completo por 29,90
 
       const isSelected = adicionaisSelecionados.includes(p.id);
       
