@@ -1,7 +1,3 @@
 {
-  "version": 2,
-  "rewrites": [
-    { "source": "/api/create-payment", "destination": "/api/create-payment.js" },
-    { "source": "/api/check-payment", "destination": "/api/check-payment.js" }
-  ]
+  "cleanUrls": true
 }
