@@ -4,51 +4,34 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Checkout Seguro - ArenaLives</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #08090b; --surface: #10151b; --card: #1a1f26;
-    --text: #f8fafc; --muted: #94a3b8;
-    --green: #15c36b; --green-hover: #12a85b;
-    --border: #2d3748; --error: #ef4444; --yellow: #facc15;
-    --font: 'Barlow', sans-serif;
-  }
+  :root { --bg: #08090b; --surface: #10151b; --card: #1a1f26; --text: #f8fafc; --muted: #94a3b8; --green: #15c36b; --green-hover: #12a85b; --border: #2d3748; --error: #ef4444; --yellow: #facc15; --font: 'Barlow', sans-serif; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--bg); color: var(--text); font-family: var(--font); -webkit-font-smoothing: antialiased; }
-  
   .banner { background: #000; color: #fff; height: 60px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 0.95rem; border-bottom: 1px solid var(--border); }
   .banner strong { font-size: 1.2rem; font-weight: 700; color: var(--yellow); }
-  
   .container { max-width: 1050px; margin: 30px auto; display: grid; grid-template-columns: 1.5fr 1fr; gap: 25px; padding: 0 20px; }
   @media (max-width: 850px) { .container { grid-template-columns: 1fr; } }
-
   .card { background: var(--surface); border-radius: 16px; padding: 30px; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
   .title { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; color: var(--text); margin-bottom: 25px; display: flex; align-items: center; gap: 10px; letter-spacing: 0.05em; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
-
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
   @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } }
-
   .input-group { display: flex; flex-direction: column; position: relative; }
   .input-group label { font-size: 0.8rem; font-weight: 600; margin-bottom: 8px; color: var(--muted); }
   .input-wrapper { position: relative; display: flex; align-items: center; width: 100%; }
-  .input-wrapper input { width: 100%; height: 48px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); font-size: 0.95rem; font-weight: 400; outline: none; padding: 0 16px 0 42px; transition: 0.2s; }
+  .input-wrapper input { width: 100%; height: 48px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); font-size: 0.95rem; outline: none; padding: 0 16px 0 42px; transition: 0.2s; }
   .input-wrapper input:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(21, 195, 107, 0.15); }
   .input-wrapper input.invalid { border-color: var(--error); background: #2a1a1a; }
   .input-icon { position: absolute; left: 14px; color: var(--muted); pointer-events: none; }
-
   .error-msg { color: var(--error); font-size: 0.75rem; font-weight: 600; margin-top: 6px; display: none; }
   .error-msg.show { display: block; }
-
-  .method { height: 80px; border-radius: 10px; background: var(--card); border: 1px solid var(--green); color: var(--green); font-weight: 700; display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 12px; margin-bottom: 24px; font-size: 0.9rem; }
-  
+  .method { height: 80px; border-radius: 10px; background: var(--card); border: 1px solid var(--green); color: var(--green); font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 24px; font-size: 0.9rem; }
   .steps { display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px; }
   .step { display: flex; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
   .step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--green); color: #fff; font-weight: 700; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .step-text h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 4px; }
   .step-text p { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
-
   .cross-sell-title { font-size: 0.8rem; font-weight: 700; color: var(--muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 30px; }
   .bump-box { border: 1px solid var(--border); border-radius: 10px; padding: 16px; display: flex; gap: 16px; align-items: center; cursor: pointer; margin-bottom: 12px; transition: 0.2s; background: var(--card); }
   .bump-box.selected { border: 1px solid var(--green); background: rgba(21, 195, 107, 0.08); }
@@ -58,32 +41,24 @@
   .bump-img { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; }
   .bump-info { flex: 1; }
   .bump-info h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 2px; }
-  .bump-info p { font-size: 0.75rem; color: var(--muted); }
   .bump-price { font-weight: 700; color: var(--green); font-size: 0.9rem; white-space: nowrap; }
-
   .btn-pay { width: 100%; height: 56px; background: var(--green); color: #fff; border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; text-transform: uppercase; cursor: pointer; margin-top: 20px; transition: 0.2s; box-shadow: 0 4px 0 #0b5e34; }
   .btn-pay:hover { background: var(--green-hover); transform: translateY(-2px); }
-  .btn-pay:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
-
   .summary-item { display: flex; gap: 16px; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--border); }
-  .summary-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
   .summary-item img { width: 65px; height: 65px; border-radius: 8px; object-fit: cover; }
   .summary-item h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 2px; }
   .summary-item p { font-size: 0.8rem; color: var(--muted); line-height: 1.4; }
   .summary-total { display: flex; justify-content: space-between; font-weight: 700; font-size: 1rem; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); }
   .summary-total span:last-child { color: var(--green); font-size: 1.4rem; }
 
-  /* PIX BOX */
-  .pix-box { display: none; text-align: center; padding: 24px; background: var(--card); border: 1px solid var(--green); border-radius: 12px; margin-top: 20px; }
-  .pix-box.show { display: block; }
-  .pix-box h3 { margin-bottom: 10px; font-size: 1rem; }
-  .pix-box img { width: 220px; height: 220px; margin: 15px auto; background: #fff; padding: 10px; border-radius: 10px; display: block; }
-  .pix-code { font-family: monospace; font-size: 0.7rem; background: var(--bg); padding: 10px; border-radius: 6px; word-break: break-all; margin: 10px 0; border: 1px solid var(--border); color: var(--muted); text-align: left; max-height: 80px; overflow: auto; }
-  .pix-copy { background: var(--green); color: #fff; border: none; border-radius: 6px; padding: 12px 24px; font-weight: 700; cursor: pointer; font-family: var(--font); width: 100%; }
-  .pix-copy:hover { background: var(--green-hover); }
-  .pix-status { font-size: 0.85rem; color: var(--yellow); margin-top: 14px; font-weight: 600; }
-  .pix-status.paid { color: var(--green); }
-  .pix-status.error { color: var(--error); }
+  /* MODAL PIX */
+  .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 99; padding: 20px; backdrop-filter: blur(5px); }
+  .modal.active { display: flex; }
+  .modal-content { background: var(--surface); padding: 30px; border-radius: 16px; text-align: center; width: 100%; max-width: 400px; position: relative; border: 1px solid var(--border); }
+  .modal-close { position: absolute; top: 15px; right: 15px; background: none; border: none; color: var(--muted); font-size: 1.5rem; cursor: pointer; }
+  #qr-container { display: flex; justify-content: center; margin: 20px 0; padding: 10px; background: #fff; border-radius: 8px; width: fit-content; margin-inline: auto; }
+  .pix-code { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; font-family: monospace; font-size: 0.75rem; margin-bottom: 15px; background: var(--bg); color: var(--muted); }
+  .btn-copy { width: 100%; padding: 15px; background: var(--green); color: #fff; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; }
 </style>
 </head>
 <body>
@@ -95,135 +70,94 @@
 <div class="container">
   <main class="card">
     <form id="form-checkout" novalidate>
-      
       <div class="title">👤 Dados Pessoais</div>
-      
       <div class="grid-2">
         <div class="input-group">
           <label>Nome Completo</label>
-          <div class="input-wrapper">
-            <input type="text" id="name" placeholder="Sem abreviações" required>
-          </div>
+          <div class="input-wrapper"><input type="text" id="name" placeholder="Sem abreviações" required></div>
         </div>
         <div class="input-group">
           <label>E-mail</label>
-          <div class="input-wrapper">
-            <input type="email" id="email" placeholder="Principal E-mail" required>
-          </div>
+          <div class="input-wrapper"><input type="email" id="email" placeholder="Principal E-mail" required></div>
         </div>
       </div>
-      
       <div class="grid-2">
         <div class="input-group">
           <label>CPF/CNPJ</label>
-          <div class="input-wrapper">
-            <input type="text" id="doc" placeholder="Seu CPF ou CNPJ" maxlength="18" inputmode="numeric" required>
-          </div>
+          <div class="input-wrapper"><input type="text" id="doc" placeholder="Seu CPF ou CNPJ" maxlength="18" inputmode="numeric" required></div>
           <span class="error-msg" id="doc-error">CPF/CNPJ inválido</span>
         </div>
-        
         <div class="input-group">
           <label>Celular (WhatsApp)</label>
-          <div class="input-wrapper">
-            <input type="tel" id="phone" placeholder="(00) 11 99999-9999" maxlength="16" inputmode="numeric" required>
-          </div>
+          <div class="input-wrapper"><input type="tel" id="phone" placeholder="(00) 11 99999-9999" maxlength="16" inputmode="numeric" required></div>
           <span class="error-msg" id="phone-error">DDD ou celular inválido</span>
         </div>
       </div>
 
       <div class="title" style="margin-top:35px;">💳 Pagamento</div>
-
       <div class="method">⚡ PIX (Aprovação Instantânea)</div>
-
       <div class="steps">
-        <div class="step"><div class="step-num">1</div><div class="step-text"><h4>Clique em "Gerar PIX"</h4><p>O QR Code e o código copia-e-cola aparecerão abaixo.</p></div></div>
+        <div class="step"><div class="step-num">1</div><div class="step-text"><h4>Clique em "Gerar PIX"</h4><p>O QR Code e o código copia-e-cola aparecerão na tela.</p></div></div>
         <div class="step"><div class="step-num">2</div><div class="step-text"><h4>Pague no seu banco</h4><p>Abra o app do banco e escaneie o QR Code ou cole o código.</p></div></div>
         <div class="step"><div class="step-num">3</div><div class="step-text"><h4>Liberação automática</h4><p>Assim que o pagamento for confirmado, você é redirecionado.</p></div></div>
       </div>
 
-      <div class="cross-sell-title">Oferta especial adicionada ao seu pedido:</div>
+      <div class="cross-sell-title">Adicione mais produtos ao seu pedido:</div>
       <div id="lista-adicionais"></div>
 
       <button type="submit" class="btn-pay" id="btn-submit">Gerar PIX</button>
-
-      <div class="pix-box" id="pix-box">
-        <h3>Escaneie o QR Code</h3>
-        <img id="pix-img" alt="QR Code PIX">
-        <div class="pix-code" id="pix-code"></div>
-        <button type="button" class="pix-copy" id="pix-copy">Copiar código PIX</button>
-        <p class="pix-status" id="pix-status">Aguardando pagamento...</p>
-      </div>
-
     </form>
   </main>
 
   <aside class="card">
     <div class="title">🛒 Resumo do Pedido</div>
     <div id="resumo-lateral"></div>
-    <div class="summary-total">
-      <span>Total</span>
-      <span id="total-price">R$ 0,00</span>
-    </div>
+    <div class="summary-total"><span>Total</span><span id="total-price">R$ 0,00</span></div>
   </aside>
 </div>
 
+<div class="modal" id="pix-modal" onclick="if(event.target === this) cancelarPix()">
+  <div class="modal-content">
+    <button class="modal-close" onclick="cancelarPix()">×</button>
+    <h2 style="font-size:1.1rem; margin-bottom:10px; color: var(--text);">Pague com PIX</h2>
+    <div id="qr-container"></div>
+    <input type="text" class="pix-code" id="pix-code" readonly onclick="this.select()">
+    <button class="btn-copy" onclick="copiar()">Copiar Código PIX</button>
+    <p id="status" style="margin-top:15px; font-size:0.85rem; font-weight:600; color:var(--muted);">Aguardando pagamento...</p>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 <script>
   const produtos = {
-    completo: { 
-      id: 'completo', 
-      nome: 'ArenaLives Completo', 
-      desc: '11 jogos para PC + APK Android. Pagamento único.', 
-      preco: 29.90, 
-      img: './images/3_3a9c87344d9f364.webp'
-    },
-    individual: { 
-      id: 'individual', 
-      nome: 'Roblox Avatar (Individual)', 
-      desc: 'Somente o jogo Roblox Avatar para PC.', 
-      preco: 9.90, 
-      img: './images/5_6c11bc7c9b6f8fa.webp'
-    }
+    completo: { id: 'completo', nome: 'ArenaLives Completo', desc: '11 jogos para PC + APK Android.', preco: 29.90, img: './images/3_3a9c87344d9f364.webp' },
+    individual: { id: 'individual', nome: 'Roblox Avatar', desc: 'Somente o jogo Roblox Avatar para PC.', preco: 9.90, img: './images/5_6c11bc7c9b6f8fa.webp' }
   };
 
   let produtoPrincipalId = 'completo';
   let adicionaisSelecionados = []; 
-  let pollingId = null;
+  let checkInterval;
+  window.pixAtualId = null;
 
   const urlParams = new URLSearchParams(window.location.search);
   const pParam = urlParams.get('p');
-  
-  if (pParam && produtos[pParam]) {
-    produtoPrincipalId = pParam;
-  }
+  if (pParam && produtos[pParam]) produtoPrincipalId = pParam;
 
   const dddsValidos = ['11','12','13','14','15','16','17','18','19','21','22','24','27','28','31','32','33','34','35','37','38','41','42','43','44','45','46','47','48','49','51','53','54','55','61','62','63','64','65','66','67','68','69','71','73','74','75','77','79','81','82','83','84','85','86','87','88','89','91','92','93','94','95','96','97','98','99'];
 
+  // Máscaras
   const telInput = document.getElementById('phone');
-  const telError = document.getElementById('phone-error');
-  
   telInput.addEventListener('input', function(e) {
     let v = e.target.value.replace(/\D/g, '').slice(0, 11);
-    this.classList.remove('invalid');
-    telError.classList.remove('show');
-
-    if (v.length >= 2 && !dddsValidos.includes(v.slice(0, 2))) {
-       this.classList.add('invalid');
-       telError.classList.add('show');
-    }
-
+    if (v.length >= 2 && !dddsValidos.includes(v.slice(0, 2))) telInput.classList.add('invalid'); else telInput.classList.remove('invalid');
     if (v.length > 7) e.target.value = `(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
     else if (v.length > 2) e.target.value = `(${v.slice(0,2)}) ${v.slice(2)}`;
     else e.target.value = v;
   });
 
   const docInput = document.getElementById('doc');
-  const docError = document.getElementById('doc-error');
-
   docInput.addEventListener('input', function(e) {
     let v = e.target.value.replace(/\D/g, '').slice(0, 14);
-    this.classList.remove('invalid');
-    docError.classList.remove('show');
-
     if (v.length > 12) e.target.value = v.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, "$1.$2.$3/$4-$5");
     else if (v.length > 9) e.target.value = v.replace(/^(\d{3})(\d{3})(\d{3})(\d{0,2})/, "$1.$2.$3-$4");
     else if (v.length > 6) e.target.value = v.replace(/^(\d{3})(\d{3})(\d{0,3})/, "$1.$2.$3");
@@ -231,156 +165,97 @@
     else e.target.value = v;
   });
 
+  // Renderização
   function renderizar() {
     const prodPrincipal = produtos[produtoPrincipalId];
     const resumoDiv = document.getElementById('resumo-lateral');
-    
-    let htmlResumo = `
-      <div class="summary-item">
-        <img src="${prodPrincipal.img}" alt="${prodPrincipal.nome}">
-        <div><h3>${prodPrincipal.nome}</h3><p>${prodPrincipal.desc}</p></div>
-      </div>
-    `;
-
+    let htmlResumo = `<div class="summary-item"><img src="${prodPrincipal.img}"><div><h3>${prodPrincipal.nome}</h3><p>${prodPrincipal.desc}</p></div></div>`;
     let total = prodPrincipal.preco;
-
     adicionaisSelecionados.forEach(id => {
-      const p = produtos[id];
-      total += p.preco;
-      htmlResumo += `
-        <div class="summary-item">
-          <img src="${p.img}" alt="${p.nome}">
-          <div><h3>${p.nome}</h3><p>${p.desc}</p></div>
-        </div>
-      `;
+      const p = produtos[id]; total += p.preco;
+      htmlResumo += `<div class="summary-item"><img src="${p.img}"><div><h3>${p.nome}</h3><p>${p.desc}</p></div></div>`;
     });
-
     resumoDiv.innerHTML = htmlResumo;
     document.getElementById('total-price').textContent = 'R$ ' + total.toFixed(2).replace('.', ',');
 
     const listaDiv = document.getElementById('lista-adicionais');
     listaDiv.innerHTML = '';
-
     Object.values(produtos).forEach(p => {
       if (p.id === produtoPrincipalId) return;
       const isSelected = adicionaisSelecionados.includes(p.id);
-      
       const box = document.createElement('div');
       box.className = `bump-box ${isSelected ? 'selected' : ''}`;
       box.onclick = () => {
-        if (adicionaisSelecionados.includes(p.id)) {
-          adicionaisSelecionados = adicionaisSelecionados.filter(id => id !== p.id);
-        } else {
-          adicionaisSelecionados.push(p.id);
-        }
+        adicionaisSelecionados = isSelected ? adicionaisSelecionados.filter(id => id !== p.id) : [...adicionaisSelecionados, p.id];
         renderizar();
       };
-
-      box.innerHTML = `
-        <div class="bump-checkbox"></div>
-        <img src="${p.img}" class="bump-img" alt="${p.nome}">
-        <div class="bump-info"><h4>${p.nome}</h4><p>Adicione ao seu pedido</p></div>
-        <div class="bump-price">R$ ${p.preco.toFixed(2).replace('.', ',')}</div>
-      `;
+      box.innerHTML = `<div class="bump-checkbox"></div><img src="${p.img}" class="bump-img"><div class="bump-info"><h4>${p.nome}</h4></div><div class="bump-price">R$ ${p.preco.toFixed(2).replace('.', ',')}</div>`;
       listaDiv.appendChild(box);
     });
   }
-
   renderizar();
 
-  function totalAtual() {
-    let total = produtos[produtoPrincipalId].preco;
-    adicionaisSelecionados.forEach(id => total += produtos[id].preco);
-    return parseFloat(total.toFixed(2));
-  }
-
   let timer = 15 * 60;
-  setInterval(() => {
-    if(timer > 0) timer--;
-    let m = String(Math.floor(timer / 60)).padStart(2, '0');
-    let s = String(timer % 60).padStart(2, '0');
-    document.getElementById('timer').textContent = `${m}:${s}`;
-  }, 1000);
+  setInterval(() => { if(timer > 0) timer--; document.getElementById('timer').textContent = String(Math.floor(timer/60)).padStart(2,'0') + ':' + String(timer%60).padStart(2,'0'); }, 1000);
 
-  // ==========================
-  // SUBMIT → Gera PIX via ZPay
-  // ==========================
+  window.cancelarPix = function() {
+    document.getElementById('pix-modal').classList.remove('active');
+    if (checkInterval) clearInterval(checkInterval);
+    window.pixAtualId = null;
+  };
+
   document.getElementById('form-checkout').addEventListener('submit', async (e) => {
     e.preventDefault();
-
     const cpfNum = docInput.value.replace(/\D/g, '');
     const telNum = telInput.value.replace(/\D/g, '');
-    
-    if (cpfNum.length !== 11 && cpfNum.length !== 14) {
-      docInput.classList.add('invalid'); docError.classList.add('show'); docInput.focus(); return;
-    }
-    if (telNum.length < 10 || telNum.length > 11 || !dddsValidos.includes(telNum.slice(0, 2))) {
-      telInput.classList.add('invalid'); telError.classList.add('show'); telInput.focus(); return;
-    }
+    if (cpfNum.length !== 11 && cpfNum.length !== 14) return alert('CPF inválido');
+    if (telNum.length < 10 || telNum.length > 11 || !dddsValidos.includes(telNum.slice(0, 2))) return alert('Celular inválido');
 
+    const totalStr = document.getElementById('total-price').textContent.replace('R$ ', '').replace(',', '.');
     const btn = document.getElementById('btn-submit');
     btn.disabled = true; btn.textContent = 'Gerando PIX...';
 
     try {
-      // AQUI ESTÁ A CORREÇÃO DA ROTA (sem .js no final)
-      const resp = await fetch('/api/create-payment', {
+      const res = await fetch('/api/create-payment', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          valor: totalAtual(),
-          nome_cliente: document.getElementById('name').value.trim(),
-          email: document.getElementById('email').value.trim(),
-          cpf: cpfNum
-        })
+        body: JSON.stringify({ valor: parseFloat(totalStr), nome_cliente: document.getElementById('name').value, email: document.getElementById('email').value, cpf: cpfNum })
       });
+      const data = await res.json();
+      if (!data.success) throw new Error(data.error);
 
-      const data = await resp.json();
-      if (!data.success) throw new Error(data.error || 'Erro ao gerar PIX');
-
-      document.getElementById('pix-box').classList.add('show');
-      document.getElementById('pix-img').src = data.qrCode;
-      document.getElementById('pix-code').textContent = data.pixCode;
-      document.getElementById('pix-status').textContent = 'Aguardando pagamento...';
-      document.getElementById('pix-status').className = 'pix-status';
-      btn.textContent = 'PIX gerado ✓';
-
-      document.getElementById('pix-copy').onclick = () => {
-        navigator.clipboard.writeText(data.pixCode);
-        document.getElementById('pix-copy').textContent = 'Copiado!';
-        setTimeout(() => document.getElementById('pix-copy').textContent = 'Copiar código PIX', 2000);
-      };
-
-      const paymentId = data.paymentId;
-      let tentativas = 0;
+      window.pixAtualId = data.paymentId;
+      document.getElementById('pix-modal').classList.add('active');
+      document.getElementById('pix-code').value = data.pixCode;
       
-      pollingId = setInterval(async () => {
-        tentativas++;
-        try {
-          // AQUI ESTÁ A CORREÇÃO DA ROTA (sem .js no final)
-          const r = await fetch(`/api/check-payment?id=${encodeURIComponent(paymentId)}`);
-          const s = await r.json();
-          
-          if (s.success && s.isPaid) {
-            clearInterval(pollingId);
-            const status = document.getElementById('pix-status');
-            status.textContent = '✅ Pagamento aprovado! Redirecionando...';
-            status.className = 'pix-status paid';
-            setTimeout(() => window.location.href = 'obrigado.html', 1200);
-          } else if (tentativas > 200) {
-            clearInterval(pollingId);
-            const status = document.getElementById('pix-status');
-            status.textContent = '⚠️ Tempo esgotado. Gere um novo PIX.';
-            status.className = 'pix-status error';
-          }
-        } catch (_) {}
+      const qrDiv = document.getElementById('qr-container');
+      qrDiv.innerHTML = '';
+      new QRCode(qrDiv, { text: data.pixCode, width: 180, height: 180 });
+
+      clearInterval(checkInterval);
+      checkInterval = setInterval(async () => {
+        const check = await fetch(`/api/check-payment?id=${data.paymentId}`);
+        const result = await check.json();
+        if (result.isPaid) {
+          clearInterval(checkInterval);
+          document.getElementById('status').textContent = '✅ Pagamento aprovado!';
+          document.getElementById('status').style.color = 'var(--green)';
+          setTimeout(() => window.location.href = 'obrigado.html', 1500);
+        }
       }, 3000);
 
     } catch (err) {
-      console.error(err);
       alert('Erro: ' + err.message);
+    } finally {
       btn.disabled = false; btn.textContent = 'Gerar PIX';
     }
   });
+
+  function copiar() {
+    document.getElementById('pix-code').select();
+    document.execCommand('copy');
+    alert('Código copiado!');
+  }
 </script>
 </body>
 </html>
