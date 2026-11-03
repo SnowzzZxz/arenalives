@@ -5,7 +5,7 @@ export default function handler(req, res) {
   const { password } = req.body;
   
   // A senha fica segura nas configurações da Vercel
-  const senhaCorreta = process.env.ADMIN_PASSWORD || 'admin123'; 
+  const senhaCorreta = process.env.ADMIN_PASSWORD || 'admin123'; // 'admin123' é o fallback
 
   if (password === senhaCorreta) {
     return res.status(200).json({ success: true });
