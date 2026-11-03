@@ -2,8 +2,6 @@
   "version": 2,
   "rewrites": [
     { "source": "/api/create-payment", "destination": "/api/create-payment.js" },
-    { "source": "/api/check-payment", "destination": "/api/check-payment.js" },
-    { "source": "/api/create-payment.js", "destination": "/api/create-payment.js" },
-    { "source": "/api/check-payment.js", "destination": "/api/check-payment.js" }
+    { "source": "/api/check-payment", "destination": "/api/check-payment.js" }
   ]
 }
