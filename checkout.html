@@ -288,7 +288,7 @@
     btn.disabled = true; btn.textContent = 'Gerando PIX...';
 
     try {
-      const resp = await fetch('api/create-payment.js', {
+      const resp = await fetch('/api/create-payment', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -320,7 +320,7 @@
       pollingId = setInterval(async () => {
         tentativas++;
         try {
-          const r = await fetch(`api/check-payment.js?id=${encodeURIComponent(paymentId)}`);
+          const r = await fetch(`/api/check-payment?id=${encodeURIComponent(paymentId)}`);
           const s = await r.json();
           if (s.success && s.isPaid) {
             clearInterval(pollingId);
