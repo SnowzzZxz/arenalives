@@ -17,10 +17,10 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--bg); color: var(--text); font-family: var(--font); -webkit-font-smoothing: antialiased; }
-
+  
   .banner { background: #000; color: #fff; height: 60px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 0.95rem; border-bottom: 1px solid var(--border); }
   .banner strong { font-size: 1.2rem; font-weight: 700; color: var(--yellow); }
-
+  
   .container { max-width: 1050px; margin: 30px auto; display: grid; grid-template-columns: 1.5fr 1fr; gap: 25px; padding: 0 20px; }
   @media (max-width: 850px) { .container { grid-template-columns: 1fr; } }
 
@@ -32,8 +32,9 @@
 
   .input-group { display: flex; flex-direction: column; position: relative; }
   .input-group label { font-size: 0.8rem; font-weight: 600; margin-bottom: 8px; color: var(--muted); }
+  
   .input-wrapper { position: relative; display: flex; align-items: center; width: 100%; }
-  .input-wrapper input { width: 100%; height: 48px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); font-size: 0.95rem; outline: none; padding: 0 16px 0 42px; transition: 0.2s; }
+  .input-wrapper input { width: 100%; height: 48px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); font-size: 0.95rem; font-weight: 400; outline: none; padding: 0 16px 0 42px; transition: 0.2s; }
   .input-wrapper input:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(21, 195, 107, 0.15); }
   .input-wrapper input.invalid { border-color: var(--error); background: #2a1a1a; }
   .input-icon { position: absolute; left: 14px; color: var(--muted); pointer-events: none; }
@@ -41,8 +42,8 @@
   .error-msg { color: var(--error); font-size: 0.75rem; font-weight: 600; margin-top: 6px; display: none; }
   .error-msg.show { display: block; }
 
-  .method { height: 80px; border-radius: 10px; background: var(--card); border: 1px solid var(--green); color: var(--green); font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 24px; font-size: 0.9rem; }
-
+  .method { height: 80px; border-radius: 10px; background: var(--card); border: 1px solid var(--green); color: var(--green); font-weight: 700; display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 12px; margin-bottom: 24px; font-size: 0.9rem; }
+  
   .steps { display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px; }
   .step { display: flex; gap: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
   .step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--green); color: #fff; font-weight: 700; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -52,7 +53,7 @@
   .cross-sell-title { font-size: 0.8rem; font-weight: 700; color: var(--muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 30px; }
   .bump-box { border: 1px solid var(--border); border-radius: 10px; padding: 16px; display: flex; gap: 16px; align-items: center; cursor: pointer; margin-bottom: 12px; transition: 0.2s; background: var(--card); }
   .bump-box.selected { border: 1px solid var(--green); background: rgba(21, 195, 107, 0.08); }
-  .bump-checkbox { width: 20px; height: 20px; border: 1.5px solid var(--muted); border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: var(--bg); }
+  .bump-checkbox { width: 20px; height: 20px; border: 1.5px solid var(--muted); border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: var(--bg); transition: 0.2s; }
   .bump-box.selected .bump-checkbox { background: var(--green); border-color: var(--green); }
   .bump-box.selected .bump-checkbox::after { content: '✓'; font-size: 14px; font-weight: bold; color: #fff; }
   .bump-img { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; }
@@ -62,7 +63,7 @@
   .bump-price { font-weight: 700; color: var(--green); font-size: 0.9rem; white-space: nowrap; }
 
   .btn-pay { width: 100%; height: 56px; background: var(--green); color: #fff; border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; text-transform: uppercase; cursor: pointer; margin-top: 20px; transition: 0.2s; box-shadow: 0 4px 0 #0b5e34; }
-  .btn-pay:hover:not(:disabled) { background: var(--green-hover); transform: translateY(-2px); }
+  .btn-pay:hover { background: var(--green-hover); transform: translateY(-2px); }
   .btn-pay:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
 
   .summary-item { display: flex; gap: 16px; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--border); }
@@ -72,18 +73,6 @@
   .summary-item p { font-size: 0.8rem; color: var(--muted); line-height: 1.4; }
   .summary-total { display: flex; justify-content: space-between; font-weight: 700; font-size: 1rem; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); }
   .summary-total span:last-child { color: var(--green); font-size: 1.4rem; }
-
-  /* PIX box */
-  .pix-box { display: none; text-align: center; padding: 24px; background: var(--card); border: 1px solid var(--green); border-radius: 12px; margin-top: 20px; }
-  .pix-box.show { display: block; }
-  .pix-box h3 { margin-bottom: 10px; font-size: 1rem; }
-  .pix-box img { width: 220px; height: 220px; margin: 15px auto; background: #fff; padding: 10px; border-radius: 10px; display: block; }
-  .pix-code { font-family: monospace; font-size: 0.7rem; background: var(--bg); padding: 10px; border-radius: 6px; word-break: break-all; margin: 10px 0; border: 1px solid var(--border); color: var(--muted); text-align: left; max-height: 80px; overflow: auto; }
-  .pix-copy { background: var(--green); color: #fff; border: none; border-radius: 6px; padding: 12px 24px; font-weight: 700; cursor: pointer; font-family: var(--font); width: 100%; }
-  .pix-copy:hover { background: var(--green-hover); }
-  .pix-status { font-size: 0.85rem; color: var(--yellow); margin-top: 14px; font-weight: 600; }
-  .pix-status.paid { color: var(--green); }
-  .pix-status.error { color: var(--error); }
 </style>
 </head>
 <body>
@@ -95,9 +84,12 @@
 <div class="container">
   <main class="card">
     <form id="form-checkout" novalidate>
-
-      <div class="title">👤 Dados Pessoais</div>
-
+      
+      <div class="title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        Dados Pessoais
+      </div>
+      
       <div class="grid-2">
         <div class="input-group">
           <label>Nome Completo</label>
@@ -112,7 +104,7 @@
           </div>
         </div>
       </div>
-
+      
       <div class="grid-2">
         <div class="input-group">
           <label>CPF/CNPJ</label>
@@ -121,6 +113,7 @@
           </div>
           <span class="error-msg" id="doc-error">CPF/CNPJ inválido</span>
         </div>
+        
         <div class="input-group">
           <label>Celular (WhatsApp)</label>
           <div class="input-wrapper">
@@ -130,29 +123,25 @@
         </div>
       </div>
 
-      <div class="title" style="margin-top:35px;">💳 Pagamento</div>
+      <div class="title" style="margin-top:35px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+        Pagamento
+      </div>
 
-      <div class="method">⚡ PIX (Aprovação Instantânea)</div>
+      <div class="method">
+        ⚡ PIX (Aprovação Instantânea)
+      </div>
 
       <div class="steps">
-        <div class="step"><div class="step-num">1</div><div class="step-text"><h4>Clique em "Gerar PIX"</h4><p>O QR Code e o código copia-e-cola aparecerão abaixo.</p></div></div>
-        <div class="step"><div class="step-num">2</div><div class="step-text"><h4>Pague no seu banco</h4><p>Abra o app do banco e escaneie o QR Code ou cole o código.</p></div></div>
-        <div class="step"><div class="step-num">3</div><div class="step-text"><h4>Liberação automática</h4><p>Assim que o pagamento for confirmado, você é redirecionado.</p></div></div>
+        <div class="step"><div class="step-num">1</div><div class="step-text"><h4>Clique em "Finalizar Pagamento"</h4><p>Você será redirecionado para a tela de pagamento seguro.</p></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text"><h4>Escolha o PIX</h4><p>Gere o QR Code ou copie a chave PIX na tela de pagamento.</p></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text"><h4>Pronto!</h4><p>Após o pagamento, o sistema liberará o seu pedido em instantes.</p></div></div>
       </div>
 
       <div class="cross-sell-title">Oferta especial adicionada ao seu pedido:</div>
       <div id="lista-adicionais"></div>
 
-      <button type="submit" class="btn-pay" id="btn-submit">Gerar PIX</button>
-
-      <div class="pix-box" id="pix-box">
-        <h3>Escaneie o QR Code</h3>
-        <img id="pix-img" alt="QR Code PIX">
-        <div class="pix-code" id="pix-code"></div>
-        <button type="button" class="pix-copy" id="pix-copy">Copiar código PIX</button>
-        <p class="pix-status" id="pix-status">Aguardando pagamento...</p>
-      </div>
-
+      <button type="submit" class="btn-pay" id="btn-submit">Finalizar Pagamento</button>
     </form>
   </main>
 
@@ -167,53 +156,68 @@
 </div>
 
 <script>
+  // PRODUTOS E LINKS DE PAGAMENTO (CAKTO)
   const produtos = {
-    completo: {
-      id: 'completo',
-      nome: 'ArenaLives Completo',
-      desc: '11 jogos para PC + APK Android. Pagamento único.',
-      preco: 29.90,
-      img: './images/3_3a9c87344d9f364.webp'
+    completo: { 
+      id: 'completo', 
+      nome: 'ArenaLives Completo', 
+      desc: '11 jogos para PC + APK Android. Pagamento único.', 
+      preco: 29.90, 
+      img: './images/3_3a9c87344d9f364.webp', 
+      link: 'https://pay.cakto.com.br/ftcjjnz_1212589' 
     },
-    individual: {
-      id: 'individual',
-      nome: 'Roblox Avatar (Individual)',
-      desc: 'Somente o jogo Roblox Avatar para PC.',
-      preco: 9.90,
-      img: './images/5_6c11bc7c9b6f8fa.webp'
+    individual: { 
+      id: 'individual', 
+      nome: 'Roblox Avatar (Individual)', 
+      desc: 'Somente o jogo Roblox Avatar para PC.', 
+      preco: 9.90, 
+      img: './images/5_6c11bc7c9b6f8fa.webp', 
+      link: 'https://pay.cakto.com.br/jtt5c7f_1212585' 
     }
   };
 
   let produtoPrincipalId = 'completo';
-  let adicionaisSelecionados = [];
-  let pollingId = null;
+  let adicionaisSelecionados = []; 
 
   const urlParams = new URLSearchParams(window.location.search);
   const pParam = urlParams.get('p');
-  if (pParam && produtos[pParam]) produtoPrincipalId = pParam;
+  
+  if (pParam && produtos[pParam]) {
+    produtoPrincipalId = pParam;
+  }
 
+  // MÁSCARAS E VALIDAÇÕES
   const dddsValidos = ['11','12','13','14','15','16','17','18','19','21','22','24','27','28','31','32','33','34','35','37','38','41','42','43','44','45','46','47','48','49','51','53','54','55','61','62','63','64','65','66','67','68','69','71','73','74','75','77','79','81','82','83','84','85','86','87','88','89','91','92','93','94','95','96','97','98','99'];
 
-  // Máscara celular
   const telInput = document.getElementById('phone');
   const telError = document.getElementById('phone-error');
-  telInput.addEventListener('input', function (e) {
+  
+  telInput.addEventListener('input', function(e) {
     let v = e.target.value.replace(/\D/g, '').slice(0, 11);
-    this.classList.remove('invalid'); telError.classList.remove('show');
-    if (v.length >= 2 && !dddsValidos.includes(v.slice(0, 2))) {
-      this.classList.add('invalid'); telError.classList.add('show');
+    this.classList.remove('invalid');
+    telError.classList.remove('show');
+
+    if (v.length >= 2) {
+      let ddd = v.slice(0, 2);
+      if (!dddsValidos.includes(ddd)) {
+         this.classList.add('invalid');
+         telError.classList.add('show');
+      }
     }
+
     if (v.length > 7) e.target.value = `(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
     else if (v.length > 2) e.target.value = `(${v.slice(0,2)}) ${v.slice(2)}`;
     else e.target.value = v;
   });
 
-  // Máscara CPF/CNPJ
   const docInput = document.getElementById('doc');
   const docError = document.getElementById('doc-error');
-  docInput.addEventListener('input', function (e) {
+
+  docInput.addEventListener('input', function(e) {
     let v = e.target.value.replace(/\D/g, '').slice(0, 14);
-    this.classList.remove('invalid'); docError.classList.remove('show');
+    this.classList.remove('invalid');
+    docError.classList.remove('show');
+
     if (v.length > 12) e.target.value = v.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, "$1.$2.$3/$4-$5");
     else if (v.length > 9) e.target.value = v.replace(/^(\d{3})(\d{3})(\d{3})(\d{0,2})/, "$1.$2.$3-$4");
     else if (v.length > 6) e.target.value = v.replace(/^(\d{3})(\d{3})(\d{0,3})/, "$1.$2.$3");
@@ -221,127 +225,104 @@
     else e.target.value = v;
   });
 
+  // RENDERIZAÇÃO DO CARRINHO
   function renderizar() {
     const prodPrincipal = produtos[produtoPrincipalId];
     const resumoDiv = document.getElementById('resumo-lateral');
-    let htmlResumo = `<div class="summary-item"><img src="${prodPrincipal.img}" alt=""><div><h3>${prodPrincipal.nome}</h3><p>${prodPrincipal.desc}</p></div></div>`;
+    
+    let htmlResumo = `
+      <div class="summary-item">
+        <img src="${prodPrincipal.img}" alt="${prodPrincipal.nome}">
+        <div><h3>${prodPrincipal.nome}</h3><p>${prodPrincipal.desc}</p></div>
+      </div>
+    `;
+
     let total = prodPrincipal.preco;
+
     adicionaisSelecionados.forEach(id => {
-      const p = produtos[id]; total += p.preco;
-      htmlResumo += `<div class="summary-item"><img src="${p.img}" alt=""><div><h3>${p.nome}</h3><p>${p.desc}</p></div></div>`;
+      const p = produtos[id];
+      total += p.preco;
+      htmlResumo += `
+        <div class="summary-item">
+          <img src="${p.img}" alt="${p.nome}">
+          <div><h3>${p.nome}</h3><p>${p.desc}</p></div>
+        </div>
+      `;
     });
+
     resumoDiv.innerHTML = htmlResumo;
     document.getElementById('total-price').textContent = 'R$ ' + total.toFixed(2).replace('.', ',');
 
     const listaDiv = document.getElementById('lista-adicionais');
     listaDiv.innerHTML = '';
+
     Object.values(produtos).forEach(p => {
       if (p.id === produtoPrincipalId) return;
-      const isSel = adicionaisSelecionados.includes(p.id);
+
+      const isSelected = adicionaisSelecionados.includes(p.id);
+      
       const box = document.createElement('div');
-      box.className = `bump-box ${isSel ? 'selected' : ''}`;
+      box.className = `bump-box ${isSelected ? 'selected' : ''}`;
       box.onclick = () => {
-        adicionaisSelecionados = isSel
-          ? adicionaisSelecionados.filter(id => id !== p.id)
-          : [...adicionaisSelecionados, p.id];
+        if (adicionaisSelecionados.includes(p.id)) {
+          adicionaisSelecionados = adicionaisSelecionados.filter(id => id !== p.id);
+        } else {
+          adicionaisSelecionados.push(p.id);
+        }
         renderizar();
       };
+
       box.innerHTML = `
         <div class="bump-checkbox"></div>
-        <img src="${p.img}" class="bump-img" alt="">
+        <img src="${p.img}" class="bump-img" alt="${p.nome}">
         <div class="bump-info"><h4>${p.nome}</h4><p>Adicione ao seu pedido</p></div>
-        <div class="bump-price">R$ ${p.preco.toFixed(2).replace('.', ',')}</div>`;
+        <div class="bump-price">R$ ${p.preco.toFixed(2).replace('.', ',')}</div>
+      `;
       listaDiv.appendChild(box);
     });
   }
-  renderizar();
 
-  function totalAtual() {
-    let total = produtos[produtoPrincipalId].preco;
-    adicionaisSelecionados.forEach(id => total += produtos[id].preco);
-    return parseFloat(total.toFixed(2));
-  }
+  renderizar();
 
   // Timer
   let timer = 15 * 60;
   setInterval(() => {
-    if (timer > 0) timer--;
-    document.getElementById('timer').textContent =
-      String(Math.floor(timer / 60)).padStart(2, '0') + ':' + String(timer % 60).padStart(2, '0');
+    if(timer > 0) timer--;
+    let m = String(Math.floor(timer / 60)).padStart(2, '0');
+    let s = String(timer % 60).padStart(2, '0');
+    document.getElementById('timer').textContent = `${m}:${s}`;
   }, 1000);
 
-  // SUBMIT → Gera PIX via ZPay
-  document.getElementById('form-checkout').addEventListener('submit', async (e) => {
+  // SUBMIT (REDIRECIONA PARA CAKTO)
+  document.getElementById('form-checkout').addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const cpfNum = docInput.value.replace(/\D/g, '');
+    const cpfInput = document.getElementById('doc');
+    const telInput = document.getElementById('phone');
+    
+    const cpfNum = cpfInput.value.replace(/\D/g, '');
     const telNum = telInput.value.replace(/\D/g, '');
-
+    
     if (cpfNum.length !== 11 && cpfNum.length !== 14) {
-      docInput.classList.add('invalid'); docError.classList.add('show'); docInput.focus(); return;
+      cpfInput.classList.add('invalid'); document.getElementById('doc-error').classList.add('show'); cpfInput.focus(); return;
     }
-    if (telNum.length < 10 || telNum.length > 11 || !dddsValidos.includes(telNum.slice(0, 2))) {
-      telInput.classList.add('invalid'); telError.classList.add('show'); telInput.focus(); return;
+    if (telNum.length < 10 || telNum.length > 11) {
+      telInput.classList.add('invalid'); document.getElementById('phone-error').classList.add('show'); telInput.focus(); return;
+    }
+    if (!dddsValidos.includes(telNum.slice(0, 2))) {
+      telInput.classList.add('invalid'); document.getElementById('phone-error').classList.add('show'); telInput.focus(); return;
     }
 
     const btn = document.getElementById('btn-submit');
-    btn.disabled = true; btn.textContent = 'Gerando PIX...';
+    btn.disabled = true; btn.textContent = 'Redirecionando...';
 
-    try {
-      const resp = await fetch('/api/create-payment', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          valor: totalAtual(),
-          nome_cliente: document.getElementById('name').value.trim(),
-          email: document.getElementById('email').value.trim(),
-          cpf: cpfNum
-        })
-      });
+    // Pega o link do produto principal e redireciona
+    const linkPagamento = produtos[produtoPrincipalId].link;
 
-      const data = await resp.json();
-      if (!data.success) throw new Error(data.error || 'Erro ao gerar PIX');
-
-      document.getElementById('pix-box').classList.add('show');
-      document.getElementById('pix-img').src = data.qrCode;
-      document.getElementById('pix-code').textContent = data.pixCode;
-      document.getElementById('pix-status').textContent = 'Aguardando pagamento...';
-      document.getElementById('pix-status').className = 'pix-status';
-      btn.textContent = 'PIX gerado ✓';
-
-      document.getElementById('pix-copy').onclick = () => {
-        navigator.clipboard.writeText(data.pixCode);
-        document.getElementById('pix-copy').textContent = 'Copiado!';
-        setTimeout(() => document.getElementById('pix-copy').textContent = 'Copiar código PIX', 2000);
-      };
-
-      const paymentId = data.paymentId;
-      let tentativas = 0;
-      pollingId = setInterval(async () => {
-        tentativas++;
-        try {
-          const r = await fetch(`/api/check-payment?id=${encodeURIComponent(paymentId)}`);
-          const s = await r.json();
-          if (s.success && s.isPaid) {
-            clearInterval(pollingId);
-            const status = document.getElementById('pix-status');
-            status.textContent = '✅ Pagamento aprovado! Redirecionando...';
-            status.className = 'pix-status paid';
-            setTimeout(() => window.location.href = 'obrigado.html', 1200);
-          } else if (tentativas > 200) {
-            clearInterval(pollingId);
-            const status = document.getElementById('pix-status');
-            status.textContent = '⚠️ Tempo esgotado. Gere um novo PIX.';
-            status.className = 'pix-status error';
-          }
-        } catch (_) {}
-      }, 3000);
-
-    } catch (err) {
-      console.error(err);
-      alert('Erro: ' + err.message);
-      btn.disabled = false; btn.textContent = 'Gerar PIX';
-    }
+    // Simula um pequeno atraso e redireciona
+    setTimeout(() => {
+      window.location.href = linkPagamento;
+    }, 800);
   });
 </script>
 </body>
