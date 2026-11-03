@@ -11,10 +11,7 @@ export default async function handler(req, res) {
 
         // Puxa os últimos 50 pagamentos da ZPay
         const response = await axios.get(`${BASE_URL}/payments?limit=50`, {
-            headers: {
-                'client-id': CLIENT_ID,
-                'client-secret': CLIENT_SECRET
-            }
+            headers: { 'client-id': CLIENT_ID, 'client-secret': CLIENT_SECRET }
         });
 
         const pagamentos = Array.isArray(response.data) ? response.data : (response.data.data || []);
@@ -22,7 +19,7 @@ export default async function handler(req, res) {
         return res.status(200).json({ success: true, data: pagamentos });
 
     } catch (error) {
-        console.error('[ZPay] Erro listar:', error.response?.data || error.message);
+      console.error('Erro ZPay:', error.message);
         return res.status(500).json({ success: false, error: 'Erro ao buscar pagamentos' });
     }
 }
