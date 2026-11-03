@@ -4,6 +4,7 @@ module.exports = async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST,OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    
     if (req.method === 'OPTIONS') return res.status(200).end();
     if (req.method !== 'POST') return res.status(405).json({ success: false, error: 'Método não permitido' });
 
@@ -11,16 +12,13 @@ module.exports = async (req, res) => {
         const { valor, nome_cliente, email, cpf } = req.body || {};
 
         const valorNum = parseFloat(valor);
-        if (!valorNum || valorNum < 1 || valorNum > 5000) {
+        if (!valorNum || valorNum < 1) {
             return res.status(400).json({ success: false, error: 'Valor inválido' });
         }
 
-        // 🔴 CHAVES HARDCODED PARA TESTE (regenere depois!)
         const CLIENT_ID = 'zpk_541f4b2f71855fb26e1201a7';
         const CLIENT_SECRET = 'zsk_87b13fb23ba5eed5d6d9f0f9e6153d20dfeac10e24a66dd6';
         const BASE_URL = 'https://zpayapi.app/api/v2';
-
-        console.log('[ZPay] Gerando PIX:', { valor: valorNum, nome: nome_cliente });
 
         const response = await axios.post(`${BASE_URL}/payments`, {
             amount: valorNum,
@@ -37,7 +35,6 @@ module.exports = async (req, res) => {
         });
 
         const data = response.data;
-        console.log('[ZPay] Resposta:', data);
 
         return res.status(200).json({
             success: true,
@@ -47,9 +44,8 @@ module.exports = async (req, res) => {
         });
 
     } catch (error) {
-        const zpayErr = error.response?.data || error.message;
-        console.error('[ZPay] ERRO:', zpayErr);
+        console.error('[ZPay] ERRO:', error.response?.data || error.message);
         const msg = error.response?.data?.message || error.response?.data?.error || error.message;
-        return res.status(400).json({ success: false, error: 'Erro ZPay: ' + msg, detalhe: zpayErr });
+        return res.status(400).json({ success: false, error: 'Erro ZPay: ' + msg });
     }
 };
