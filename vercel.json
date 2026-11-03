@@ -1,9 +1,7 @@
-content.js:1 Evaluating a string as JavaScript violates the following Content Security Policy directive because 'unsafe-eval' is not an allowed source of script: "script-src 'self' 'wasm-unsafe-eval' 'inline-speculation-rules' chrome-extension://98b2b658-c980-494c-a876-7894ed24eb2a/".
- The action has been blocked.
-initListeners @ content.js:1
-run @ content.js:1
-(anonymous) @ content.js:1
-(anonymous) @ content.js:1
-/favicon.ico:1  Failed to load resource: the server responded with a status of 404 ()
-/api/create-payment:1  Failed to load resource: the server responded with a status of 404 ()
-checkout.html?p=completo:379 SyntaxError: Unexpected token 'T', "The page c"... is not valid JSO
+{
+  "version": 2,
+  "rewrites": [
+    { "source": "/api/create-payment", "destination": "/api/create-payment.js" },
+    { "source": "/api/check-payment", "destination": "/api/check-payment.js" }
+  ]
+}
